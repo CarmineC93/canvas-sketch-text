@@ -26,7 +26,7 @@ const sketch = ({context, width, height})=> {
     typeContext.fillStyle = 'black';
     typeContext.fillRect(0, 0, cols, rows);
 
-    fontSize = cols;
+    fontSize = cols * 1.2;
 
     typeContext.fillStyle = 'white';
     typeContext.font = `${fontSize}px ${fontFamily}`;
@@ -60,7 +60,7 @@ const sketch = ({context, width, height})=> {
     context.textBaseline = 'middle';
     context.textAlign = 'center';
 
-    context.drawImage(typeCanvas, 0 ,0 );
+    //context.drawImage(typeCanvas, 0 ,0 );
 
     for (let i = 0 ; i<numCells; i++){
       const col = i % cols;
@@ -77,6 +77,8 @@ const sketch = ({context, width, height})=> {
       const glyph = getGlyph(r);
 
       context.font = `${cell * 2}px ${fontFamily}`;
+      if (Math.random() < 0.1) context.font = `${cell * 6}px ${fontFamily}`;
+
 
       // context.fillStyle = `rgb(${r}, ${g}, ${b})`
       context.fillStyle = 'white';
@@ -97,8 +99,9 @@ const sketch = ({context, width, height})=> {
 const getGlyph = (v) => {
   if (v < 50) return '';
   if (v < 100) return '.';
-  if (v < 150) return '-';
+  if (v < 150) return 'word';
   if (v < 200) return '+';
+
 
   const glyphs = '_= /'.split('')
 
